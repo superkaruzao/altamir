@@ -2,59 +2,86 @@ const avaliacoesSlider = document.querySelector('.avaliacoes-slider');
 const avaliacoesSlides = document.querySelectorAll('.avaliacoes-slide');
 let avaliacoesIndex = 0;
 
+function getSlidesPerView() {
+    return window.innerWidth >= 1024 ? 3 : 1;
+}
+
 function avaliacoesShowSlide(i) {
-  if (i < 0) avaliacoesIndex = avaliacoesSlides.length - 1;
-  else if (i >= avaliacoesSlides.length) avaliacoesIndex = 0;
-  else avaliacoesIndex = i;
-  avaliacoesSlider.style.transform = `translateX(${-avaliacoesIndex * 100}%)`;
+    const total = avaliacoesSlides.length;
+    const slidesPerView = getSlidesPerView();
+    const maxIndex = total - slidesPerView;
+    if (i < 0) avaliacoesIndex = maxIndex;
+    else if (i > maxIndex) avaliacoesIndex = 0;
+    else avaliacoesIndex = i;
+    const slideWidth = 100 / slidesPerView;
+    avaliacoesSlider.style.transform = `translateX(-${avaliacoesIndex * slideWidth}%)`;
 }
 
 function avaliacoesPrevSlide() {
-  avaliacoesShowSlide(avaliacoesIndex - 1);
+    avaliacoesShowSlide(avaliacoesIndex - 1);
 }
 
 function avaliacoesNextSlide() {
-  avaliacoesShowSlide(avaliacoesIndex + 1);
+    avaliacoesShowSlide(avaliacoesIndex + 1);
 }
+
+// Atualiza ao redimensionar
+window.addEventListener('resize', () => {
+    avaliacoesShowSlide(avaliacoesIndex);
+});
+
+// Swipe/touch para mobile
+let startX = 0;
+let currentTranslate = 0;
+let isDragging = false;
 
 function isMobile() {
     return window.innerWidth <= 600;
 }
 
-let startX = 0;
-let currentTranslate = 0;
-let isDragging = false;
-
-const slider = document.querySelector('.avaliacoes-slider');
-const slides = document.querySelectorAll('.avaliacoes-slide');
-const slideCount = slides.length;
-
-// Touch events only on mobile
-if (isMobile()) {
-    slider.addEventListener('touchstart', (e) => {
+function addTouchEvents() {
+    avaliacoesSlider.addEventListener('touchstart', (e) => {
         isDragging = true;
         startX = e.touches[0].clientX;
-        currentTranslate = -avaliacoesIndex * slider.offsetWidth;
-        slider.style.transition = 'none';
+        currentTranslate = -avaliacoesIndex * avaliacoesSlider.offsetWidth;
+        avaliacoesSlider.style.transition = 'none';
     });
 
-    slider.addEventListener('touchmove', (e) => {
+    avaliacoesSlider.addEventListener('touchmove', (e) => {
         if (!isDragging) return;
         const diff = e.touches[0].clientX - startX;
-        slider.style.transform = `translateX(${currentTranslate + diff}px)`;
+        avaliacoesSlider.style.transform = `translateX(${currentTranslate + diff}px)`;
     });
 
-    slider.addEventListener('touchend', (e) => {
+    avaliacoesSlider.addEventListener('touchend', (e) => {
         if (!isDragging) return;
         isDragging = false;
         const diff = e.changedTouches[0].clientX - startX;
         if (diff > 50 && avaliacoesIndex > 0) {
             avaliacoesPrevSlide();
-        } else if (diff < -50 && avaliacoesIndex < slideCount - 1) {
+        } else if (diff < -50 && avaliacoesIndex < avaliacoesSlides.length - 1) {
             avaliacoesNextSlide();
         } else {
             avaliacoesShowSlide(avaliacoesIndex);
         }
-        slider.style.transition = 'transform 0.5s';
+        avaliacoesSlider.style.transition = 'transform 0.5s';
     });
 }
+
+// Adiciona/remover eventos de touch conforme o tamanho da tela
+function handleTouchEvents() {
+    if (isMobile()) {
+        addTouchEvents();
+    } else {
+        // Remove touch events no desktop (opcional)
+        avaliacoesSlider.ontouchstart = null;
+        avaliacoesSlider.ontouchmove = null;
+        avaliacoesSlider.ontouchend = null;
+    }
+}
+
+window.addEventListener('resize', handleTouchEvents);
+handleTouchEvents();
+
+// Inicializa o slider
+avaliacoesShowSlide(avaliacoesIndex);
