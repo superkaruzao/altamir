@@ -14,20 +14,24 @@ body {
 }
 
 .header-container {
-    background: black;
-    padding: 4rem 2rem;
+    background-image: url("/assets/altamir-pc.jpg");
+    padding: 4em 2em;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 1920px 1080px;
+    background-attachment: fixed;
 }
 
 .header-wrapper {
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-start;
+    align-items: center;
     gap: 3em;
-    width: 100%;
+    align-self: flex-start;
 }
 
 .logo {
@@ -38,30 +42,33 @@ body {
     align-self: flex-start;
 }
 
+
 .header-content {
     flex: 2 1 500px;
     color: #fff;
-    max-width: 1197px;
+    width: 100%;
+}
+
+.header-title {
+    width: 50%;
 }
 
 .header-title h3 {
-    font-size: clamp(1.8rem, 2.5vw, 2.8rem);
+    font-size: 1.7em;
     font-weight: 700;
     line-height: 1.3;
     text-transform: uppercase;
     margin-bottom: 1em;
     letter-spacing: 1px;
-    /* padding-right: 1rem; */
 }
 
 .header-title p {
     color: #ccc;
-    font-size: clamp(1rem, 1.2vw, 1.15em);
+    font-size: 1.15em;
     font-weight: 300;
     line-height: 1.2;
     margin-bottom: 1.5em;
-    max-width: 600px;
-    text-align: justify;
+    width: 54%;
 }
 
 .header-rating {
@@ -250,92 +257,71 @@ body {
     text-align: left;
 }
 
-.avaliacoes-container {
-    font-family: Arial, sans-serif;
-    background: #fff;
-    margin: 0;
-    padding: 40px 20px;
+.avaliacoes {
+    background-color: #fff;
+    padding: 4em 1em;
 }
 
-.avaliacoes-container h2 {
+.avaliacoes .conteudo .titulo h3 {
+    color: #000;
+    font-size: 1.5em;
+    font-weight: 400;
     text-align: center;
-    margin-bottom: 30px;
+    text-transform: uppercase;
 }
 
-.avaliacoes-slider-container {
-    position: relative;
-    width: 100%;
-    max-width: 1100px;
-    margin: auto;
-    overflow: hidden;
-    padding: 0 20px 0 60px;
+.avaliacoes .conteudo .items .swiper {
+    height: fit-content;
 }
 
-.avaliacoes-slider {
-    display: flex;
-    gap: 24px;
-    transition: transform 0.5s;
+.avaliacoes .conteudo .items .swiper .item {
+    background-color: #7373731A;
+    height: 300px;
+    padding: 2em;
 }
 
-.avaliacoes-slide {
-    min-width: 100%;
-    box-sizing: border-box;
-}
-
-.avaliacoes-card {
-    flex: 1;
-    min-width: 280px;
-    background: #f7f7f7;
-    padding: 20px;
-    border-radius: 16px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    height: 350px;
-}
-
-.avaliacoes-card h3 {
-    margin: 0 0 10px;
-}
-
-.avaliacoes-card p {
-    line-height: 1.5;
-}
-
-.avaliacoes-stars {
-    color: #f5c518;
-    margin: 5px 0 15px;
-}
-
-.avaliacoes-nav-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    background: #ffffff;
-    color: #333;
-    border: none;
-    cursor: pointer;
-    border-radius: 50%;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    display: flex;
+.avaliacoes .conteudo .items .swiper .item .titulo {
     align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.avaliacoes .conteudo .items .swiper .item .titulo h3 {
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+    text-transform: none;
+}
+
+.avaliacoes .conteudo .items .swiper .item .titulo img {
+    width: 25px;
+}
+
+.avaliacoes .conteudo .items .swiper .item .texto .estrelas i {
+    color: #f6ba04;
+}
+
+.avaliacoes .conteudo .items .swiper .item .texto p {
+    margin-top: 0.5em;
+}
+
+.avaliacoes .conteudo .botao {
+    display: grid;
     justify-content: center;
-    font-size: 20px;
-    transition: all 0.3s ease;
 }
 
-.avaliacoes-nav-button:hover {
-    background: #f5c518;
+.avaliacoes .conteudo .botao p {
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.avaliacoes .conteudo .botao a {
+    background-color: transparent;
+    background-image: linear-gradient(180deg, #3CAB21 0%, #1A4E07 100%);
+    border-radius: 7px;
     color: #fff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
-
-.avaliacoes-nav-button.left {
-    left: 10px;
-}
-
-.avaliacoes-nav-button.right {
-    right: 10px;
+    padding: 22px 25px;
+    text-decoration: none;
+    text-transform: uppercase;
 }
 
 .faq-container {
@@ -453,17 +439,19 @@ details[open] .faq-summary .caret {
 
 @media (max-width: 1024px) {
     .header-container {
-        display: flex;
-        flex-direction: column;
+        background-size: 1024px 870px;
     }
+
     .header-container,
     .footer-container {
         padding-left: 1em;
         padding-right: 1em;
     }
+
     .services-wrapper {
         gap: 24px;
     }
+
     .about-container {
         padding: 50px 10px;
     }
@@ -474,126 +462,165 @@ details[open] .faq-summary .caret {
         padding: 2em 0.5em;
         display: flex;
         flex-direction: column;
+        background-image: url("/assets/altamir-mobile.jpg");
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        background-size: cover;
     }
+
     .header-title {
         padding: 0;
+        width: 100%;
     }
 
     .header-title h3 {
         font-size: 1.2em;
-        text-align: justify;
         padding: 0;
     }
+
     .header-title p {
-        text-align: justify;
         padding: 0;
+        width: 100%;
     }
+
     .header-wrapper {
         flex-direction: column;
         align-items: center;
         gap: 1.5em;
     }
+
     .header-content {
         padding: 0 0.5em;
     }
+
     .header-button {
         align-items: center;
     }
+
     .logo {
         max-width: 300px;
         align-self: center;
     }
+
     .services-container {
         padding: 2em 0.5em;
     }
+
     .services-title h3 {
         font-size: 1.3em;
     }
+
     .services-items {
         grid-template-columns: 1fr;
         gap: 16px;
     }
+
     .item {
         padding: 1.2em 0.8em;
     }
+
     .icon img {
         width: 48px;
     }
+
     .about-container {
         padding: 30px 5px;
     }
+
     .about-title {
         padding: 2rem
     }
+
     .about-title h3 {
         font-size: 1em;
     }
+
     .about-title p {
         font-size: 0.95em;
     }
+
     .footer-container {
         gap: 16px;
         padding: 2em 0.5em 4rem;
     }
+
     .logo {
         width: 300px;
     }
+
     .footer-info p,
     .footer-info a {
         font-size: 15px;
     }
-    .avaliacoes-slider-container {
-        padding: 0 10px; /* tira excesso de padding lateral */
-    }
-    .avaliacoes-slide {
-        min-width: 100%;
-        max-width: 100%;
-        flex: 0 0 100%;
+
+    .avaliacoes .wrapper .conteudo {
         display: flex;
+        flex-direction: column;
         justify-content: center;
+        gap: 30px;
     }
-    .avaliacoes-card {
-        flex: 1;
+
+    .passo-container .passo-conteudo .passo-items {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+        justify-items: center;
+        align-items: start;
+    }
+
+    .passo-container .passo-conteudo .passo-item {
         width: 100%;
-        max-width: 95%; /* deixa uma margem lateral */
-        margin: 0 auto;
-        height: auto; /* ajusta altura para conteúdo */
+        padding: 1rem 0;
     }
-    .avaliacoes-slider {
-        gap: 12px; /* espaço entre cards */
-        flex-wrap: nowrap;
+
+    .passo-container .passo-conteudo .passo-numero span {
+        font-size: clamp(2.5rem, 12vw, 6rem);
+        -webkit-text-stroke: 1.5px white;
     }
-    .avaliacoes-nav-button {
+
+    .swiper-button-prev,
+    .swiper-button-next {
         display: none;
     }
+
     .faq-title {
         font-size: 1.2em;
     }
+
     .faq-content {
         font-size: 0.95em;
     }
 }
 
 @media (max-width: 400px) {
+    .header-container {
+        background-image: url("/assets/altamir-mobile.jpg");
+    }
+
     .header-title h3,
     .services-title h3,
     .about-title h3,
     .faq-title {
         font-size: 1em;
     }
+
     .logo {
         max-width: 90px;
     }
+
     .header-button img {
         width: 110px;
     }
+
     .services-title h3::after,
     .about-title h3::after {
         width: 40px;
     }
-    .avaliacoes-card {
-        min-width: 90%;
-        max-width: 100%;
+
+    .swiper-button-prev,
+    .swiper-button-next {
+        display: none;
     }
 }
 
