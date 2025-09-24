@@ -439,7 +439,7 @@ details[open] .faq-summary .caret {
 
 @media (max-width: 1024px) {
     .header-container {
-        background-size: 1024px 870px;
+        background-size: 100% 100%;
     }
 
     .header-container,
